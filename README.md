@@ -42,3 +42,6 @@ No se han subido por contener material o nombres de terceros, o datos personales
 
 ---
 Los archivos `.trashed-*`, las copias («- copia») y los duplicados entre carpetas no se han listado.
+
+## Referencias
+Ver [REFERENCIAS.md](REFERENCIAS.md).
