@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AGs-Core · Chat</title>
+<style>
+  :root { --bg:#0b0f1a; --panel:#131a2a; --acc:#4f8cff; --txt:#dbe4ff; --dim:#7a8ab0; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--bg); color:var(--txt); font-family:system-ui,Segoe UI,Arial;
+         display:flex; height:100vh; }
+  #side { width:250px; background:var(--panel); padding:14px; display:flex;
+          flex-direction:column; gap:10px; border-right:1px solid #1e2a45; }
+  #main { flex:1; display:flex; flex-direction:column; }
+  h1 { font-size:16px; color:var(--acc); }
+  label { font-size:11px; color:var(--dim); }
+  select, input[type=text], input[type=password] { width:100%; padding:7px;
+      background:#0d1424; color:var(--txt); border:1px solid #26355c; border-radius:6px; }
+  #chat { flex:1; overflow-y:auto; padding:16px; }
+  .msg { margin:8px 0; padding:10px 12px; border-radius:10px; max-width:85%;
+         white-space:pre-wrap; font-size:13.5px; line-height:1.5; }
+  .user { background:#1c2b52; margin-left:auto; }
+  .ags  { background:#141d33; border:1px solid #243156; }
+  .err  { background:#3a1520; border:1px solid #6b2233; }
+  #bar { display:flex; gap:8px; padding:12px; background:var(--panel);
+         border-top:1px solid #1e2a45; }
+  #q { flex:1; padding:10px; background:#0d1424; color:var(--txt);
+       border:1px solid #26355c; border-radius:8px; }
+  button { padding:10px 18px; background:var(--acc); color:#fff; border:0;
+           border-radius:8px; cursor:pointer; font-weight:600; }
+  button:hover { filter:brightness(1.15); }
+  .row { display:flex; gap:8px; align-items:center; }
+  #st { font-size:11px; color:var(--dim); white-space:pre-wrap; }
+</style>
+</head>
+<body>
+<div id="side">
+  <h1>◆ AGs-Core v1.1.0</h1>
+  <label>Token API (X-API-Key)</label>
+  <input type="password" id="token" placeholder="vacío = sin auth">
+  <label>Proyecto</label>
+  <select id="proj">
+    <option value="">auto (enrutado)</option>
+    <option>zero_a</option><option>neuroglyq</option><option>d3he_tokamak</option>
+    <option>mei_rit</option><option>q_matrix</option><option>iqm_he3</option>
+  </select>
+  <div class="row"><input type="checkbox" id="plan"><label for="plan">modo plan (multi-paso)</label></div>
+  <button onclick="refreshStatus()">⟳ Estado</button>
+  <div id="st">—</div>
+</div>
+<div id="main">
+  <div id="chat"></div>
+  <div id="bar">
+    <input id="q" placeholder="Pregunta al AGs: ¿cuánto amoniaco produce 25 MW?" autofocus>
+    <button onclick="send()">Enviar ⏎</button>
+  </div>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+const tok = () => $("token").value || localStorage.getItem("ags_token") || "";
+$("token").value = localStorage.getItem("ags_token") || "";
+$("token").addEventListener("change", e => localStorage.setItem("ags_token", e.target.value));
+
+function add(cls, txt) {
+  const d = document.createElement("div");
+  d.className = "msg " + cls; d.textContent = txt;
+  $("chat").appendChild(d); $("chat").scrollTop = $("chat").scrollHeight;
+}
+async function api(path, body) {
+  const r = await fetch(path, { method: body ? "POST" : "GET",
+    headers: { "Content-Type": "application/json", "X-API-Key": tok() },
+    body: body ? JSON.stringify(body) : undefined });
+  if (r.status === 401) { add("err", "⛔ 401 No autorizado — revisa el token."); return null; }
+  return r.json();
+}
+async function send() {
+  const q = $("q").value.trim(); if (!q) return;
+  $("q").value = ""; add("user", q);
+  add("ags", "…");
+  const pend = $("chat").lastChild;
+  const body = { query: q, plan: $("plan").checked };
+  if ($("proj").value) body.project = $("proj").value;
+  const r = await api("/api/v1/query", body);
+  if (r) pend.textContent = `[${r.project} · ${r.mode}]\n${r.response}`;
+}
+async function refreshStatus() {
+  const s = await api("/api/v1/status");
+  if (s) $("st").textContent =
+    `Proyectos: ${Object.keys(s.projects).length}\nMemoria: ${s.experiences} exp.\nNN loss: ${s.nn_best_loss.toFixed(2)} (${s.nn_active ? "activa" : "aprendiendo"})`;
+}
+$("q").addEventListener("keydown", e => { if (e.key === "Enter") send(); });
+refreshStatus();
+</script>
+</body>
+</html>

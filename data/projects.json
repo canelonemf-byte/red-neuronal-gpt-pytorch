@@ -1,0 +1,76 @@
+{
+  "projects": [
+    {
+      "id": "zero_a",
+      "name": "zero_a",
+      "domain": "amoniaco verde / combustible sintético",
+      "status": "activo",
+      "version": "1.0.0",
+      "summary": "Producción de amoniaco verde como vector energético y combustible sintético.",
+      "keywords": ["amoniaco", "nh3", "combustible", "sintetico", "haber", "bosch", "electrolisis", "t/dia", "tdia", "coste", "inversion"]
+    },
+    {
+      "id": "neuroglyq",
+      "name": "neuroglyq",
+      "domain": "neuromodulación de precisión",
+      "status": "activo",
+      "version": "1.0.0",
+      "summary": "Neuromodulación de precisión: estimulación dirigida y protocolos cuantificados.",
+      "keywords": ["neuromodulacion", "tdcs", "tacs", "estimulacion", "cerebro", "eeg", "electrodo", "protocolo", "dosis", "ma/cm2"]
+    },
+    {
+      "id": "d3he_tokamak",
+      "name": "d3he_tokamak",
+      "domain": "fusión D-He3 esférica",
+      "status": "activo",
+      "version": "1.0.0",
+      "summary": "Reactor de fusión esférico deuterio-helio-3: confinamiento, equilibrio y balance.",
+      "keywords": ["fusion", "tokamak", "deuterio", "helio-3", "he3", "plasma", "confinamiento", "kev", "densidad", "ignicion", "tau", "lawson"]
+    },
+    {
+      "id": "mei_rit",
+      "name": "mei_rit",
+      "domain": "propulsor de plasma de yodo",
+      "status": "activo",
+      "version": "1.0.0",
+      "summary": "Propulsor de plasma de yodo (MEI-RIT): corrosión controlada y aceleración iónica.",
+      "keywords": ["propulsor", "yodo", "propulsion", "corrosion", "ion", "empuje", "thrust", "impulso", "consumo"]
+    },
+    {
+      "id": "q_matrix",
+      "name": "q_matrix",
+      "domain": "ODMR / sensores cuánticos",
+      "status": "activo",
+      "version": "1.0.0",
+      "summary": "Matriz de sensores cuánticos ODMR (NV centers): lectura, calibración y mapeo.",
+      "keywords": ["odmr", "nv", "diamante", "cuantico", "sensor", "espines", "zeeman", "split", "ghz", "magnetico", "contraste", "fotones", "sensibilidad"]
+    },
+    {
+      "id": "iqm_he3",
+      "name": "iqm_he3",
+      "domain": "patente OEPM (completado)",
+      "status": "completado",
+      "version": "1.0.0",
+      "summary": "Patente registrada ante OEPM. Proyecto cerrado; sin herramienta de cálculo nueva.",
+      "keywords": ["patente", "oepm", "iqm", "registro"]
+    },
+    {
+      "id": "ecosistema",
+      "name": "ecosistema",
+      "domain": "co-simulación integrada",
+      "status": "sistema",
+      "version": "1.2.0",
+      "summary": "Balance de energía y materiales: NH3, agua y O2. El He-3 no se inventa sin fracción D-D.",
+      "keywords": ["ecosistema", "co-simulacion", "integrado", "sinergia", "balance del ecosistema"]
+    },
+    {
+      "id": "llp_prat",
+      "name": "llp_prat",
+      "domain": "búsqueda de anomalías en el globo",
+      "status": "activo",
+      "version": "3.0.0",
+      "summary": "Globo, sensores de satélite y tráfico. No duplica los proyectos de física.",
+      "keywords": ["globo", "anomalia", "prat", "satelite", "sensor", "trafico"]
+    }
+  ]
+}
