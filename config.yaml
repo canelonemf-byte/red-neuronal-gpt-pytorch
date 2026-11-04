@@ -1,0 +1,23 @@
+ags:
+  language: es
+  name: AGs-Core / conscious_universe
+  version: 1.1.0
+api:
+  token: ''
+learning:
+  auto_learn_every_n_turns: 20
+  checkpoint_dir: checkpoints
+  epochs_per_session: 1
+memory:
+  db_path: data/ags_memory.sqlite
+  embed_dim: 256
+model:
+  batch_tokens: 8192
+  ctx_len: 256
+  d_model: 256
+  device: auto
+  lr: 0.0003
+  n_heads: 8
+  n_layers: 6
+  nn_max_loss: 1.5
+projects_registry: data/projects.json

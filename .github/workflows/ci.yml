@@ -27,3 +27,12 @@ jobs:
           else
             echo "Sin directorio tests"
           fi
+      - name: Diagnóstico de entrada incompleta (esperado exit 2)
+        run: |
+          set +e
+          out=$(python server.py 2>&1)
+          code=$?
+          echo "$out"
+          test "$code" -eq 2
+          echo "$out" | grep -q "Falta código REAL"
+
